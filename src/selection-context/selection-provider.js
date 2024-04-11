@@ -82,7 +82,7 @@ const reducer = (state, { type, payload }) => {
     }
 }
 
-const SelectionProvider = ({ children }) => {
+const SelectionProvider = ({ disableHistory, children }) => {
     const { dataApprovalWorkflows } = useAppContext()
     const [
         { openedSelect, workflow, period, orgUnit, dataSet, filter },
@@ -126,6 +126,7 @@ const SelectionProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        if (disableHistory === true) return
         pushStateToHistory({ workflow, period, orgUnit, dataSet })
     }, [workflow, period, orgUnit, dataSet])
 
