@@ -12,6 +12,7 @@ const ACTIONS = {
     SELECT_PERIOD: 'SELECT_PERIOD',
     SELECT_ORG_UNIT: 'SELECT_ORG_UNIT',
     SELECT_DATA_SET: 'SELECT_DATA_SET',
+    SELECT_FILTER: 'SELECT_FILTER',
     SET_STATE_FROM_QUERY_PARAMS: 'SET_STATE_FROM_QUERY_PARAMS',
 }
 
@@ -29,6 +30,7 @@ const reducer = (state, { type, payload }) => {
                 period: null,
                 orgUnit: null,
                 dataSet: null,
+                filter: '',
             }
         case ACTIONS.SELECT_WORKFLOW:
             return {
@@ -65,6 +67,11 @@ const reducer = (state, { type, payload }) => {
                 ...state,
                 dataSet: payload.dataSet,
             }
+        case ACTIONS.SELECT_FILTER:
+            return {
+                ...state,
+                filter: payload.filter,
+            }
         case ACTIONS.SET_STATE_FROM_QUERY_PARAMS:
             return {
                 openedSelect: '',
@@ -77,16 +84,19 @@ const reducer = (state, { type, payload }) => {
 
 const SelectionProvider = ({ children }) => {
     const { dataApprovalWorkflows } = useAppContext()
-    const [{ openedSelect, workflow, period, orgUnit, dataSet }, dispatch] =
-        useReducer(reducer, {
-            openedSelect: '',
-            ...initialValues(dataApprovalWorkflows),
-        })
+    const [
+        { openedSelect, workflow, period, orgUnit, dataSet, filter },
+        dispatch,
+    ] = useReducer(reducer, {
+        openedSelect: '',
+        ...initialValues(dataApprovalWorkflows),
+    })
 
     const providerValue = {
         workflow,
         period,
         orgUnit,
+        filter,
         openedSelect,
         dataSet,
         clearAll: () =>
@@ -111,6 +121,8 @@ const SelectionProvider = ({ children }) => {
             dispatch({ type: ACTIONS.SELECT_ORG_UNIT, payload: { orgUnit } }),
         selectDataSet: (dataSet) =>
             dispatch({ type: ACTIONS.SELECT_DATA_SET, payload: { dataSet } }),
+        selectFilter: (filter) =>
+            dispatch({ type: ACTIONS.SELECT_FILTER, payload: { filter } }),
     }
 
     useEffect(() => {

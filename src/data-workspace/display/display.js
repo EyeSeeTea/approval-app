@@ -14,18 +14,19 @@ import { Table } from './table.js'
 const query = {
     dataSetReport: {
         resource: 'dataSetReport',
-        params: ({ dataSetId, periodIds, orgUnit }) => ({
+        params: ({ dataSetId, periodIds, orgUnit, filter }) => ({
             // arrays are being handled by the app runtime
             pe: periodIds,
             ds: dataSetId,
             ou: orgUnit.id,
+            filter: filter,
         }),
     },
 }
 
 const Display = ({ dataSetId }) => {
     const selection = useSelectionContext()
-    const { orgUnit, workflow, period } = selection
+    const { orgUnit, workflow, period, filter } = selection
     const { dataSets } = workflow
     const selectedDataSet = dataSets.find(({ id }) => id === dataSetId)
     const periodIds = selectedDataSet
@@ -40,7 +41,8 @@ const Display = ({ dataSetId }) => {
         lazy: true,
     })
     const tables = data?.dataSetReport
-    const fetchDataSet = () => refetch({ periodIds, dataSetId, orgUnit })
+    const fetchDataSet = () =>
+        refetch({ periodIds, dataSetId, orgUnit, filter })
 
     useEffect(
         () => {
