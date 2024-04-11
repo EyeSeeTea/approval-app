@@ -28,6 +28,10 @@ A deployable `.zip` file can be found in `build/bundle`!
 
 See the section about [building](https://platform.dhis2.nu/#/scripts/build) for more information.
 
+### `yarn build-lib`
+
+Builds the library for production to the `build` folder.
+
 ### `yarn deploy`
 
 Deploys the built app in the `build` folder to a running DHIS2 instance.<br />

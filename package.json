@@ -5,7 +5,8 @@
     "license": "BSD-3-Clause",
     "private": true,
     "scripts": {
-        "build": "d2-app-scripts build",
+        "build": "cp d2.config.app.js d2.config.js && d2-app-scripts build",
+        "build-lib": "cp d2.config.lib.js d2.config.js && d2-app-scripts build",
         "deploy": "d2-app-scripts deploy",
         "format": "d2-style apply",
         "format:staged": "d2-style apply --staged",
@@ -45,5 +46,11 @@
         "prop-types": "^15.7.2",
         "query-string": "^7.0.1",
         "use-debounce": "^7.0.0"
+    },
+    "main": "./build/cjs/app/index.js",
+    "module": "./build/es/app/index.js",
+    "exports": {
+        "import": "./build/es/app/index.js",
+        "require": "./build/cjs/app/index.js"
     }
 }
