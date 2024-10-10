@@ -11,6 +11,8 @@ export const pushStateToHistory = (state) => {
         // not an object, use "undefined" so there's no empty query param in
         // url
         dataSet: state.dataSet || undefined,
+        hideSelectors: state.hideSelectors || undefined,
+        filter: state.filter || undefined,
     })
 
     const search = paramString ? `?${paramString}` : ''

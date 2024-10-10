@@ -77,7 +77,7 @@ const reducer = (state, { type, payload }) => {
 
 const SelectionProvider = ({ children }) => {
     const { dataApprovalWorkflows } = useAppContext()
-    const [{ openedSelect, workflow, period, orgUnit, dataSet }, dispatch] =
+    const [{ openedSelect, workflow, period, orgUnit, dataSet, hideSelectors, filter }, dispatch] =
         useReducer(reducer, {
             openedSelect: '',
             ...initialValues(dataApprovalWorkflows),
@@ -89,6 +89,8 @@ const SelectionProvider = ({ children }) => {
         orgUnit,
         openedSelect,
         dataSet,
+        filter,
+        hideSelectors,
         clearAll: () =>
             dispatch({
                 type: ACTIONS.CLEAR_ALL,
@@ -114,7 +116,7 @@ const SelectionProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        pushStateToHistory({ workflow, period, orgUnit, dataSet })
+        pushStateToHistory({ workflow, period, orgUnit, dataSet, hideSelectors, filter })
     }, [workflow, period, orgUnit, dataSet])
 
     useEffect(() => {

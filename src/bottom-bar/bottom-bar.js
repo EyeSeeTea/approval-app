@@ -8,6 +8,7 @@ import { BottomBarItem } from './bottom-bar-item.js'
 import styles from './bottom-bar.module.css'
 import { UnacceptButton } from './unaccept-button/index.js'
 import { UnapproveButton } from './unapprove-button/index.js'
+import { useSelectionContext } from '../selection-context/use-selection-context.js'
 
 const approvedStatuses = new Set([
     APPROVAL_STATUSES.APPROVED_HERE,
@@ -16,6 +17,7 @@ const approvedStatuses = new Set([
 ])
 
 const BottomBar = () => {
+    const selection = useSelectionContext();
     const { allowedActions, approvalStatus, approvedBy, approvedAt } =
         useWorkflowContext()
     const { hasApprovalAuthorities } = useIsAuthorized()
@@ -25,6 +27,8 @@ const BottomBar = () => {
            by showing a disabled button rather than an empty space */
         (!mayApprove && !mayUnapprove) ||
         (mayApprove && approvedStatuses.has(approvalStatus))
+
+    if (selection.hideSelectors) return null;
 
     return (
         <>
