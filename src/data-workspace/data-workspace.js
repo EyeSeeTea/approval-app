@@ -6,17 +6,20 @@ import { TitleBar } from './title-bar/index.js'
 import { useSelectedDataSet } from './use-selected-data-set/index.js'
 
 const DataWorkspace = () => {
-    const { workflow, selectDataSet } = useSelectionContext()
+    const { workflow, selectDataSet, hideSelectors } = useSelectionContext()
     const selectedDataSet = useSelectedDataSet()
 
     return (
         <>
-            <TitleBar />
-            <DataSetNavigation
-                dataSets={workflow?.dataSets}
-                selected={selectedDataSet}
-                onChange={selectDataSet}
-            />
+            {!hideSelectors && 
+                <>
+                    <TitleBar />
+                    <DataSetNavigation
+                        dataSets={workflow?.dataSets}
+                        selected={selectedDataSet}
+                        onChange={selectDataSet}
+                    />
+                </>}
             <Display dataSetId={selectedDataSet} />
         </>
     )

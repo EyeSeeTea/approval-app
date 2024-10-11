@@ -7,5 +7,6 @@ module.exports = {
     minDHIS2Version: '2.37',
     entryPoints: {
         app: './src/app/index.js',
+        plugin: './src/app/index.js',
     },
 }

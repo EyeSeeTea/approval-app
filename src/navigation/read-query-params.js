@@ -11,5 +11,7 @@ export const readQueryParams = () => {
         ou: params.ou,
         ouDisplayName: params.ouDisplayName,
         dataSet: params.dataSet,
+        hideSelectors: params.hideSelectors,
+        filter: params.filter,
     }
 }

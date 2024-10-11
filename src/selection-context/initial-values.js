@@ -3,14 +3,14 @@ import { parsePeriodId } from '../shared/index.js'
 
 export const initialValues = (workflows) => {
     const queryParams = readQueryParams()
-    const { wf, pe, ou, ouDisplayName, dataSet: dataSetParam } = queryParams
+    const { wf, pe, ou, ouDisplayName, dataSet: dataSetParam, hideSelectors, filter } = queryParams
 
     const workflow = initialWorkflowValue(workflows, wf)
     const period = initialPeriodValue(pe, workflow)
     const orgUnit = initialOrgUnitValue(ou, ouDisplayName)
     const dataSet = initialDataSetValue(dataSetParam)
 
-    return { workflow, period, orgUnit, dataSet }
+    return { workflow, period, orgUnit, dataSet, hideSelectors, filter }
 }
 
 export const initialWorkflowValue = (workflows, workflowId) => {
